@@ -1,29 +1,62 @@
 <template>
-    <form>
-      <div id="cform">
-        <h3>Personal Information</h3>
-        <label>Firstname:</label>
-        <input type="text" require v-model="firstname">
-        <label>Lastname:</label>
-        <input type="text" required v-model="lastname">
-        <label>Email:</label>
-        <input type="email" required v-model="email">
-        <label>Phone Number:</label>
-        <input type="number" required v-model.number="phonenumber">
+    <form @submit.prevent="saveCandidate">
+      <div>
+        <div>
+          <h3>Personal Information</h3>
+          <label>Firstname:</label>
+          <input type="text" require v-model="firstname">
+          <span v-if="reqFieldEmptyError" class="error"> {{ reqFieldEmptyError }}</span>
+          <label>Lastname:</label>
+          <input type="text" required v-model="lastname">
+          <label>Email:</label>
+          <input type="email" required v-model="email">
+          <label>Phone Number:</label>
+          <input type="number" required v-model.number="phonenumber">
+          <label>Gender:</label>
+          <input type="radio" id="male" value="Male" v-model="gender" />
+          <label for="male">Male</label>
+          <input type="radio" id="female" value="Female" v-model="gender" />
+          <label for="female">Female</label>
+        </div>
+        
+        <div>
+          <h3>Address</h3>
+          <label>City:</label>
+          <input type="text" require v-model="city">
+          <label>Country:</label>
+          <input type="text" required v-model="country">
+          <label>State:</label>
+          <input type="text" required v-model="state">
+          <label>Zip Code:</label>
+          <input type="number" required v-model.number="zipcode">
+        </div>
+        
+        <h3>Other Details</h3>
+        <label>Educational Level:</label>
+        <select v-model="educationallevel">
+          <option value="Associate Degree">ssociate Degree</option>
+          <option value="Bachelor’s degree">Bachelor’s degree</option>
+          <option value="Master’s Degree">Master’s Degree</option>
+          <option value="Doctorate Degree">Doctorate Degree</option>
+        </select>
+        <label>Years of Experience:</label>
+        <input type="text" required v-model="yearsofexp">
         <label>Job Title:</label>
-        <select v-model="role">
+        <select v-model="jobtitle">
           <option value="Business Intelligence Engineer">Business Intelligence Engineer</option>
           <option value="Software Engineer">Software Engineer</option>
         </select>
-        <h4>Address</h4>
-        <label>City:</label>
-        <input type="text" require v-model="firstname">
-        <label>Lastname:</label>
-        <input type="text" required v-model="lastname">
-        <label>Email:</label>
-        <input type="email" required v-model="email">
-        <label>Phone Number:</label>
-        <input type="number" required v-model.number="phonenumber">
+        <label>Skills:</label>
+        <textarea v-model="skills" placeholder="Add skills in comma-separated format" @keyup.alt="addSkill"></textarea>
+        <label>Supplier Name:</label>
+        <input type="text" required v-model="suppliername">
+        <label>Customer Name:</label>
+        <input type="text" required v-model="customername">
+        <div class="submit">
+          <button>Save Candidate</button>
+        </div>
+       
+        
       </div>
     </form>
 </template>
@@ -35,10 +68,31 @@
         firstname: '',
         lastname: '',
         email: '',
-        role: '',
-        phonenumber: ''
+        jobtitle: '',
+        phonenumber: '',
+        tempSkills: '',
+        skills: []
+      }
+    },
+    methods: {
+      addSkill(skill) {
+        if (skill.key === ',' && this.tempSkills) {
+          this.skills.push(this.tempSkills)
+        }
+      },
+      saveCandidate(){
+        this.reqFieldEmptyError = this.firstname === '' ? 'This is a required field' : '';
+        // if (this.firstname === '') {
+        //   this.reqFieldEmptyError = 'This is a required field';
+        //   console.log("no firstnmame")
+        // }
+        console.log(this.firstname)
+        console.log(this.lastname)
+        console.log(this.email)
+        console.log(this.phonenumber)
       }
     }
+
   }
 </script>
 
