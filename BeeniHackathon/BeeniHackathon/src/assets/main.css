@@ -1,5 +1,63 @@
 @import './base.css';
 
+form {
+  width: 186%;
+  display: block;
+  margin: 20px auto; 
+  background: white;
+  text-align: left;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+label {
+  color: #414141;
+  display: inline-block;
+  margin: 25px 0 15px;
+  font-size: 0.6em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+input, select, textarea {
+  display: block;
+  padding: 10px 6px;
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  color: #555;
+}
+
+input[type="radio"] {
+  display: inline-block;
+  width: 16px;
+  margin: 0 10px 0 0;
+  position: relative;
+  top: 2px;
+}
+
+button {
+  background: #588548;
+  border: 0;
+  padding: 10px 20px;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  border-radius: 20px;
+}
+
+#cform {
+  max-width: 600px;
+  margin: 10px auto;
+  background: rgb(146, 185, 130);
+  text-align: left;
+  padding: 30px;
+  border-radius: 10px;
+}
+
 #app {
   max-width: 1280px;
   margin: 0 auto;
@@ -32,4 +90,11 @@ a,
     grid-template-columns: 1fr 1fr;
     padding: 0 2rem;
   }
+}
+
+/* Hide the spinner buttons in Chrome, Safari, Edge, and Opera */
+.no-spinner::-webkit-outer-spin-button,
+.no-spinner::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
