@@ -4,14 +4,13 @@
         <div>
           <h3>Personal Information</h3>
           <label>Firstname:</label>
-          <input type="text" require v-model="firstname">
-          <span v-if="reqFieldEmptyError" class="error"> {{ reqFieldEmptyError }}</span>
+          <input type="text" required v-model="firstname">
           <label>Lastname:</label>
           <input type="text" required v-model="lastname">
           <label>Email:</label>
           <input type="email" required v-model="email">
           <label>Phone Number:</label>
-          <input type="number" required v-model.number="phonenumber">
+          <input type="number" required class="no-spinner" v-model.number="phonenumber">
           <label>Gender:</label>
           <input type="radio" id="male" value="Male" v-model="gender" />
           <label for="male">Male</label>
@@ -28,7 +27,7 @@
           <label>State:</label>
           <input type="text" required v-model="state">
           <label>Zip Code:</label>
-          <input type="number" required v-model.number="zipcode">
+          <input type="number" required class="no-spinner" v-model.number="zipcode">
         </div>
         
         <h3>Other Details</h3>
@@ -47,7 +46,7 @@
           <option value="Software Engineer">Software Engineer</option>
         </select>
         <label>Skills:</label>
-        <textarea v-model="skills" placeholder="Add skills in comma-separated format" @keyup.alt="addSkill"></textarea>
+        <textarea v-model="skills" placeholder="Add skills in comma-separated format"></textarea>
         <label>Supplier Name:</label>
         <input type="text" required v-model="suppliername">
         <label>Customer Name:</label>
@@ -71,132 +70,24 @@
         jobtitle: '',
         phonenumber: '',
         tempSkills: '',
-        skills: []
+        skills: [],
+        gender: ''
       }
     },
     methods: {
-      addSkill(skill) {
-        if (skill.key === ',' && this.tempSkills) {
-          this.skills.push(this.tempSkills)
-        }
-      },
+      // addSkill(skill) {
+      //   if (skill.key === ',' && this.tempSkills) {
+      //     this.skills.push(this.tempSkills)
+      //   }
+      // },
       saveCandidate(){
-        this.reqFieldEmptyError = this.firstname === '' ? 'This is a required field' : '';
-        // if (this.firstname === '') {
-        //   this.reqFieldEmptyError = 'This is a required field';
-        //   console.log("no firstnmame")
-        // }
         console.log(this.firstname)
         console.log(this.lastname)
         console.log(this.email)
         console.log(this.phonenumber)
+        console.log(this.gender)
       }
     }
 
   }
 </script>
-
-<style>
-</style>
-<!-- <script setup>
-  import {reactive} from 'vue'
-  import QuickvForm from '@/components/Form.vue'
-  import QuickvInput from '@/components/Input.vue'
-
-  const formData = reactive({
-    firstName:'',
-    lastName:'',
-    email:'',
-    phoneNumber:'',
-    age:'',
-    password:''
-  })
-  
-
-
-</script>
-<template>
-  <div>
-    <quickv-form formId="authForm" name="myAuthForm">
-      <div class="grid grid-cols-2 gap-4 container mx-auto my-4">
-        <QuickvInput
-          inputId="firstName"
-          inputName="myInputFirstName"
-          fieldPlaceholder="firstName" 
-          label="firstName"
-          qvRules='required|minlength:3|maxlength:20'
-          qvMessages='The firstname is required | The name should be at least 3 characters | The field size should not exceed 20 characters'
-          qvInvalidClass='border border-red-500'
-          qvValidClass='border border-green-500'
-          v-model="formData.firstName"
-        />
-        <QuickvInput
-          inputId="lastName"
-          inputName="myInputLastName"
-          fieldPlaceholder="lastName" 
-          label="lastName"
-          qvRules='required|minlength:3|maxlength:20'
-          qvMessages='The lastname is required | The name should be at least 3 characters | The field size should not exceed 20 characters'
-          qvInvalidClass='border border-red-500'
-          qvValidClass='border border-green-500'
-          v-model="formData.lastName"
-        />
-        <QuickvInput
-          inputId="email"
-          inputName="myInputEmail"
-          type="email"
-          fieldPlaceholder="Email" 
-          label="email"
-          qvRules='required|email'
-          qvMessages='The email is required | invalid email'
-          qvInvalidClass='border border-red-500'
-          qvValidClass='border border-green-500'
-          v-model="formData.email"
-        />
-        <QuickvInput
-          inputId="phoneNumber"
-          inputName="myInputPhone"
-          type="number"
-          fieldPlaceholder="PhoneNumber" 
-          label="phoneNumber"
-          qvRules='required|number'
-          qvMessages='The phoneNumber is required | invalid number'
-          qvInvalidClass='border border-red-500'
-          qvValidClass='border border-green-500'
-          v-model="formData.phoneNumber"
-        />
-        <QuickvInput
-          inputId="age"
-          inputName="myInputAge"
-          type="number"
-          fieldPlaceholder="Age" 
-          label="Age"
-          qvRules='required|number|between:18,35'
-          qvMessages='age is required | invalid number| number between 18 and 35'
-          qvInvalidClass='border border-red-500'
-          qvValidClass='border border-green-500'
-          v-model="formData.age"
-        />
-        <QuickvInput
-          inputId="password"
-          inputName="myInputPassword"
-          type="password"
-          fieldPlaceholder="Password" 
-          label="password"
-          qvRules='required|password'
-          qvMessages='password is required |invalide password ,password contain  !@#$%^&*(),.?":{}|<>'
-          qvInvalidClass='border border-red-500'
-          qvValidClass='border border-green-500'
-          v-model="formData.password"
-        />
-      </div>
-
-
-    </quickv-form>
-
-  </div>
-</template>
-
-<style  scoped>
-
-</style> -->
