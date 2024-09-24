@@ -10,7 +10,7 @@ app = Flask(__name__)
 def check_one():
     request_candidate = request.get_json()
 
-    filepath = 'D:/npax/BeeniHackathon/BeeniHackathon/fuzzy_wuzzy/data/recruitment_data1.csv'
+    filepath = './data/recruitment_data1.csv'
     df = pd.read_csv(rf'{filepath}')
 
     header = ['First Name', 'Last Name', 'Date of Birth', 'Email', 'Phone Number', 'Address', 'Job Title', 'Skillset']
