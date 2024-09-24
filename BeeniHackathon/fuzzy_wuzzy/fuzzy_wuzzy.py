@@ -42,21 +42,20 @@ for candidate in existing_candidates:
     for key, value in candidate.items():
         for input_key in input_candidate.keys():
             if input_key == key:
-                # print(f'existing candidate: {key}, {value}')
-                # print(f'input candidate: {input_key}, {input_candidate[input_key]}')
+                #print(f'existing candidate: {key}, {value}')
+                #print(f'input candidate: {input_key}, {input_candidate[input_key]}')
                 
                 if fuzzy_config[input_key] == 1: 
                     score = fuzz.ratio(str(value), str(input_candidate[key]))
+                    total_score += score
                 elif fuzzy_config[input_key] == 2: 
                     score = fuzz.token_sort_ratio(str(value), str(input_candidate[key]))
-                total_score += score
-                counter += 1
+                    total_score += score
+    counter += 1
     
-    average_score = total_score / len(input_candidate)
+    average_score = total_score / (len(input_candidate) - 1)
 
-    print(f'total_score1: {average_score}')
-
-    if average_score >= min_treshold:   
+    if average_score >= 80:   
 
         for key, value in candidate.items():
             for input_key in input_candidate.keys():
@@ -64,9 +63,8 @@ for candidate in existing_candidates:
                     if fuzzy_config[input_key] == 0:
                         score = fuzz.ratio(str(value), str(input_candidate[key]))
                         total_score += score
-
-        print(f'total_score2: {average_score}')
-                        
+       
+    if average_score >= min_treshold:   
         average_score = total_score / len(input_candidate)
 
         candidate.update({'Result ID':counter})
