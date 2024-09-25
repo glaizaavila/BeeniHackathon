@@ -1,14 +1,15 @@
 <template>
-  <CandidateForm />
+  <nav>
+    <h1 class="green">Hello! </h1>
+    <RouterLink to="/create" id="candidateCreate">Create Candaidate</RouterLink>
+    <RouterLink to="/list" id="candidateList">View Candidate List</RouterLink>
+  </nav>
+  <main>
+    <RouterView />
+  </main>
 </template>
 
 <script>
-  import CandidateForm from '@/components/CandidateForm.vue'
-
-  export default {
-     name: 'App',
-     components: { CandidateForm }
-  }
 </script>
 
 <style>
@@ -20,10 +21,12 @@
   color: #2c3e50;
   margin-top: 60px;
 }
+
 body {
   margin: 0;
   background: #eee;
 }
+
 header {
   line-height: 1.5;
   max-height: 100vh;
