@@ -2,13 +2,13 @@ from fuzzywuzzy import fuzz
 import pandas as pd
 import json
 
-filepath = 'C:\\Users\\Lloyd\\Desktop\\fuzzywuzzy\\.venv\\data\\recruitment_data1.csv'
+filepath = r'C:\Users\MY PC\BeeniHackathon-1\BeeniHackathon\fuzzy_wuzzy\data\recruitment_data1.csv'
 
-df = pd.read_csv(rf'{filepath}')
+df_file = pd.read_csv(filepath)
 
 header = ['First Name', 'Last Name', 'Date of Birth', 'Email', 'Phone Number', 'Address', 'Job Title', 'Skillset']
 
-df = df[header]
+df = df_file[header]
 
 #df['Date of Birth'] = pd.to_datetime(['Date of Birth'], format='%m/%d/%Y')
 
@@ -38,7 +38,6 @@ result = []
 for candidate in existing_candidates:
     total_score = 0
     counter = 0
-
     for key, value in candidate.items():
         for input_key in input_candidate.keys():
             if input_key == key:
@@ -72,8 +71,11 @@ for candidate in existing_candidates:
         result.append(candidate)
     
 json_result = json.dumps(result, indent=2)
-print(json_result)
 
-def csv_write(): 
-    df = pd.DataFrame(input_candidate, index=[0])
-    df.to_csv(filepath, mode='a', columns=header, header=False)
+if result: #terminates the code if input candidate has match
+    exit()
+else: #proceeds to save input candidate if there is no duplicate match
+    df_input = pd.DataFrame(input_candidate, index=[0])
+    df_input = df_input.reindex(columns=df_file.columns)
+    #df.to_csv(filepath, mode='a', columns=header, header=False)
+    print(df_input)
