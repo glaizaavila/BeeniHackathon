@@ -1,0 +1,40 @@
+{
+  "hash": "e6dd682e",
+  "configHash": "51852e3e",
+  "lockfileHash": "4e23642f",
+  "browserHash": "f9424335",
+  "optimized": {
+    "vue": {
+      "src": "../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "file": "vue.js",
+      "fileHash": "1eda1641",
+      "needsInterop": false
+    },
+    "bootstrap/dist/js/bootstrap.bundle.js": {
+      "src": "../../node_modules/bootstrap/dist/js/bootstrap.bundle.js",
+      "file": "bootstrap_dist_js_bootstrap__bundle__js.js",
+      "fileHash": "b54192c1",
+      "needsInterop": true
+    },
+    "vue3-easy-data-table": {
+      "src": "../../node_modules/vue3-easy-data-table/dist/vue3-easy-data-table.es.js",
+      "file": "vue3-easy-data-table.js",
+      "fileHash": "e9bcc172",
+      "needsInterop": false
+    },
+    "vue-router": {
+      "src": "../../node_modules/vue-router/dist/vue-router.mjs",
+      "file": "vue-router.js",
+      "fileHash": "bc79a9c0",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-FRAIUV63": {
+      "file": "chunk-FRAIUV63.js"
+    },
+    "chunk-BUSYA2B4": {
+      "file": "chunk-BUSYA2B4.js"
+    }
+  }
+}
