@@ -93,9 +93,7 @@ def save_record():
     filepath = r'./data/recruitment_data1.csv' #change filepath
     df_file=pd.read_csv(filepath)
     df_input['applicantId']=df_file['applicantId'].max()+1
-
     df_input = df_input.reindex(columns=df_file.columns)
-
     df_input.to_csv(filepath, mode='a', columns=header, header=False)
     return jsonify({'message': 'New candidate saved successfully!'})
 
