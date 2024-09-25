@@ -1,6 +1,4 @@
-from flask import Flask
-from flask import request
-from flask import jsonify
+from flask import Flask, jsonify, request
 from fuzzywuzzy import fuzz
 import pandas as pd
 import json
@@ -74,11 +72,18 @@ def check_one():
 #@app.route('/check/singlecandidate', methods=[ 'POST']) #change route
 def save_record():
     input = request.get_json()
-    input_df=pd.read_json(input)
-   
+    df_input=pd.read_json(input)
     filepath = r'C:\Users\MY PC\BeeniHackathon-1\BeeniHackathon\fuzzy_wuzzy\data\recruitment_data1.csv' #change filepath
     df_file=pd.read_csv(filepath)
+    df_input['applicantId']=df_file['applicantId'].max()+1
+
     df_input = df_input.reindex(columns=df_file.columns)
 
     df_input.to_csv(filepath, mode='a', columns=header, header=False)
     return jsonify({'message': 'New candidate saved successfully!'})
+
+#@app.route('/check/singlecandidate', methods=[ 'POST']) #change route
+def read_all_record(): #if we want a table of all candidates
+    filepath = r'C:\Users\MY PC\BeeniHackathon-1\BeeniHackathon\fuzzy_wuzzy\data\recruitment_data1.csv' #change filepath
+    df_file=pd.read_csv(filepath)
+    return jsonify(df_file)
