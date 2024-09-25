@@ -11,10 +11,14 @@ def check_one():
 
     #filepath = './data/recruitment_data1.csv' #change filepath
     filepath = r'D:/npax/BeeniHackathon/BeeniHackathon/fuzzy_wuzzy/data/recruitment_data1.csv' #change filepath
-    df_file = pd.read_csv(rf'{filepath}')
+    df_file = pd.read_csv(rf'{filepath}', index_col=False)
+    test = df_file.fillna('')
 
     #header = ['applicantId','firstName', 'lastName', 'birthDate', 'email', 'phoneNumber', 'address', 'skills']
-    header = ['applicantId','firstName', 'lastName', 'birthDate', 'email', 'phoneNumber', 'address', 'jobTitle', 'skills', 'gender', 'educationLevel', 'yearsOfExperience', 'supplierName', 'customerName']
+    header = ['applicantId','applicationDate','firstName', 'lastName', 
+              'gender', 'birthDate', 'phoneNumber', 'email', 'address', 
+              'educationLevel', 'yearsOfExperience', 'jobTitle', 'status',
+              'supplierName', 'customerName', 'skills']
 
     df = df_file[header]
 
@@ -45,6 +49,7 @@ def check_one():
                     , 'yearsOfExperience': 0
                     , 'supplierName': 0
                     , 'customerName': 0
+                    , 'applicationDate': 0
                     }
 
     min_treshold = 70
@@ -75,16 +80,19 @@ def check_one():
                         if fuzzy_config[input_key] == 2:
                             score = fuzz.ratio(str(value), str(input_candidate[key]))
                             total_score += score
-            average_score = total_score / (len(input_candidate)-1)
+            average_score = total_score / (len(input_candidate) - 7)
+        
         if average_score >= min_treshold: 
             counter += 1
             candidate.update({'Result ID':counter})
             candidate.update({'averageScore':average_score})
             result.append(candidate)
             df_result=pd.DataFrame(result)
-            df_result=df_result[['applicantId','averageScore']]
-            merged_df = pd.merge(df_result, df_file, left_on='applicantId',right_on='applicantId', how='left')
-            merged_dict=merged_df.to_dict(orient='records')
+            test2 = df_result.fillna('')
+            # df_result=df_result.fillna(0)
+            #df_result=df_result[['applicantId','averageScore']]
+            #merged_df = pd.merge(test2, test, left_on='applicantId',right_on='applicantId', how='outer')
+            merged_dict=test2.to_dict(orient='records')
             
     if counter==0:
         input_candidate_json = json.dumps(input_candidate)
@@ -92,11 +100,13 @@ def check_one():
         df_input = pd.DataFrame(input_candidate_pd, index=[0])
         df_input['applicantId']=df_file['applicantId'].max()+1
         df_input = df_input.reindex(columns=df_file.columns)
-        df_input.to_csv(filepath, mode='a', columns=header, header=False)
+        df_input.to_csv(filepath, mode='a', columns=header, header=False, index=False, na_rep='')
         merged_dict={}
+
     
     return merged_dict
-    #return merged_dict.to_json(orient='records')
+    #return json.dumps(merged_dict)
+
 
 # for saving data    
 @app.route('/candidate/submit', methods=[ 'POST']) #change route
@@ -115,11 +125,6 @@ def read_all_record(): #if we want a table of all candidates
     #filepath = r'D:/npax/BeeniHackathon/BeeniHackathon/fuzzy_wuzzy/data/recruitment_data1.csv' #change filepath
     filepath = './data/recruitment_data1.csv' #change filepath
     df_file=pd.read_csv(filepath)
-    print(df_file)
-    
-    dict_file=df_file.to_dict(orient='records')
-    print(type(dict_file))
     
     json_file=df_file.to_json(orient='records')
-    print(type(json_file))
     return json_file
