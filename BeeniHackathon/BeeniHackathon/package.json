@@ -13,9 +13,11 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "bootstrap": "^5.3.3",
     "mande": "^2.0.9",
     "vue": "^3.4.29",
-    "vue-router": "^4.3.3"
+    "vue-router": "^4.3.3",
+    "vue3-easy-data-table": "^1.5.47"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.8.0",
