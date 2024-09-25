@@ -3,53 +3,46 @@
     <div class="container">
         <div class="box">
             <div role="dialog">
+                <h5> Personal Information</h5>
+                <dl>
+                    <dd> First Name: </dd>
+                    <dd> Last Name: </dd>
+                    <dd> Email: </dd>
+                    <dd> Phone Number: <span> Gender: </span> </dd>
+                </dl>
+                <hr>
+                <h6> Address</h6>
 
-                <head>
-                    <h5> Personal Information</h5>
-                </head>
-
-                <body>
-                    <dl>
-                        <dd> First Name: </dd>
-                        <dd> Last Name: </dd>
-                        <dd> Email: </dd>
-                        <dd> Phone Number: <span> Gender: </span> </dd>
-                    </dl>
-                    <hr>
-                    <h6> Address</h6>
-
-                    <dl>
-                        <dd>
-                            <span> City:</span>
-                            <span> Country:</span>
-                        </dd>
-                        <dd>
-                            <span> State:</span>
-                            <span> Zipcode:</span>
-                        </dd>
-                    </dl>
-                    <hr>
-                    <h6> Work Experience: </h6>
-                    <dl>
-                        <dd>
-                            Education Level
-                        </dd>
-                        <dd>
-                            <span> Years of Experience:</span>
-                            <span> Job Title:</span>
-                        </dd>
-                    </dl>
-                    <hr>
-                    <h6> Application Details</h6>
-                    <dl>
-                        <dd> Supplier Name: </dd>
-                        <dd> Customer Name: </dd>
-                        <dd> Applicant ID: </dd>
-                        <dd> Appplication Date: </dd>
-                        <dd> Application: </dd>
-                    </dl>
-
-                </body>
+                <dl>
+                    <dd>
+                        <span> City:</span>
+                        <span> Country:</span>
+                    </dd>
+                    <dd>
+                        <span> State:</span>
+                        <span> Zipcode:</span>
+                    </dd>
+                </dl>
+                <hr>
+                <h6> Work Experience: </h6>
+                <dl>
+                    <dd>
+                        Education Level
+                    </dd>
+                    <dd>
+                        <span> Years of Experience:</span>
+                        <span> Job Title:</span>
+                    </dd>
+                </dl>
+                <hr>
+                <h6> Application Details</h6>
+                <dl>
+                    <dd> Supplier Name: </dd>
+                    <dd> Customer Name: </dd>
+                    <dd> Applicant ID: </dd>
+                    <dd> Appplication Date: </dd>
+                    <dd> Application: </dd>
+                </dl>
                 <footer>
                     <button class = "btn btn-secondary btn-sm btn-block" @click="$event => $emit('close')">
                         Close
