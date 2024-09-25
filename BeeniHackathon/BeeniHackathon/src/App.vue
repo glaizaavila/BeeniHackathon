@@ -1,13 +1,17 @@
 <template>
   <CandidateForm />
+  <br>
+  <CandidateDataTable></CandidateDataTable>
+  <br>
 </template>
 
 <script>
   import CandidateForm from '@/components/CandidateForm.vue'
+  import CandidateDataTable from '@/components/CandidateDataTable.vue'
 
   export default {
      name: 'App',
-     components: { CandidateForm }
+     components: { CandidateForm, CandidateDataTable }
   }
 </script>
 
