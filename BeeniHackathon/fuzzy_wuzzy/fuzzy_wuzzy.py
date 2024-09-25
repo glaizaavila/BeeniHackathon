@@ -6,33 +6,34 @@ filepath = r'C:\Users\MY PC\BeeniHackathon-1\BeeniHackathon\fuzzy_wuzzy\data\rec
 
 df_file = pd.read_csv(filepath)
 
-header = ['First Name', 'Last Name', 'Date of Birth', 'Email', 'Phone Number', 'Address', 'Job Title', 'Skillset']
+header = ['applicantId','firstName', 'lastName', 'birthDate', 'email', 'phoneNumber', 'address', 'skills']
 
 df = df_file[header]
 
-#df['Date of Birth'] = pd.to_datetime(['Date of Birth'], format='%m/%d/%Y')
-
 existing_candidates = df.to_dict(orient='records')
 
-input_candidate = {'First Name': 'Scott'
-                   , 'Last Name': 'Sheppard'
-                   , 'Date of Birth': '8/31/1992'
-                   , 'Email': 'perezjanet@example.org'
-                   , 'Phone Number': '421-429-7655x39421'
-                   , 'Address': '597 Smith Point'
-                   , 'Job Title': 'Chief Tecology Officer'
-                   , 'Skillset': 'python, pandas'}
+applicantmax=df['applicantId'].max()+1
 
-fuzzy_config = {'First Name': 1
-                , 'Last Name': 1
-                , 'Date of Birth': 0
-                , 'Email': 1
-                , 'Phone Number': 1
-                , 'Address': 1
-                , 'Job Title': 1
-                , 'Skillset': 2}
+input_candidate = {'applicantId': int(applicantmax)
+                    ,'firstName': 'Scott'
+                   , 'lastName': 'Sheppard'
+                   , 'birthDate': '8/31/1992'
+                   , 'email': 'perezjanet@example.org'
+                   , 'phoneNumber': '421-429-7655x39421'
+                   , 'address': '597 Smith Point'
+                   , 'skills': 'python, pandas'}
 
-min_treshold = 80
+#0 - not considered, 1 - ratio, 2 - birthday, 3 - sort ratio, 4 - partial ratio
+fuzzy_config = {'applicantId':0
+                ,'firstName': 1
+                , 'lastName': 1
+                , 'birthDate': 2
+                , 'email': 1
+                , 'phoneNumber': 1
+                , 'address': 1
+                , 'skills': 3}
+
+min_treshold = 70
 result = []
 
 for candidate in existing_candidates:
@@ -40,14 +41,11 @@ for candidate in existing_candidates:
     counter = 0
     for key, value in candidate.items():
         for input_key in input_candidate.keys():
-            if input_key == key:
-                #print(f'existing candidate: {key}, {value}')
-                #print(f'input candidate: {input_key}, {input_candidate[input_key]}')
-                
+            if input_key == key:                
                 if fuzzy_config[input_key] == 1: 
                     score = fuzz.ratio(str(value), str(input_candidate[key]))
                     total_score += score
-                elif fuzzy_config[input_key] == 2: 
+                elif fuzzy_config[input_key] == 3: 
                     score = fuzz.token_sort_ratio(str(value), str(input_candidate[key]))
                     total_score += score
     counter += 1
@@ -55,11 +53,10 @@ for candidate in existing_candidates:
     average_score = total_score / (len(input_candidate) - 1)
 
     if average_score >= 80:   
-
         for key, value in candidate.items():
             for input_key in input_candidate.keys():
                 if input_key == key:
-                    if fuzzy_config[input_key] == 0:
+                    if fuzzy_config[input_key] == 2:
                         score = fuzz.ratio(str(value), str(input_candidate[key]))
                         total_score += score
        
@@ -67,15 +64,11 @@ for candidate in existing_candidates:
         average_score = total_score / len(input_candidate)
 
         candidate.update({'Result ID':counter})
-        candidate.update({'Average Score':average_score})
+        candidate.update({'averageScore':average_score})
         result.append(candidate)
     
-json_result = json.dumps(result, indent=2)
-
-if result: #terminates the code if input candidate has match
-    exit()
-else: #proceeds to save input candidate if there is no duplicate match
-    df_input = pd.DataFrame(input_candidate, index=[0])
-    df_input = df_input.reindex(columns=df_file.columns)
-    #df.to_csv(filepath, mode='a', columns=header, header=False)
-    print(df_input)
+df_result=pd.DataFrame(result)
+df_result=df_result[['applicantId','averageScore']]
+merged_df = pd.merge(df_result, df_file, left_on='applicantId',right_on='applicantId', how='left')
+merged_dict=merged_df.to_dict(orient='records')
+print(merged_dict)
