@@ -6,7 +6,7 @@ form {
   margin: 20px auto; 
   background: white;
   text-align: left;
-  padding: 30px;
+  padding: 20px 30px;
   border-radius: 10px;
 }
 
@@ -47,7 +47,17 @@ button {
   margin-right: auto;
   color: white;
   border-radius: 20px;
+  cursor: pointer;
 }
+
+/* Change style on hover */
+button:hover {
+  background-color: #4f7741;
+}
+
+/* button:active {
+  background-color: #588548;
+} */
 
 #cform {
   max-width: 600px;
@@ -63,6 +73,10 @@ button {
   margin: 0 auto;
   padding: 2rem;
   font-weight: normal;
+}
+
+h3 {
+  padding-top: 10px;
 }
 
 a,
