@@ -13,7 +13,8 @@ def check_one():
     filepath = r'D:/npax/BeeniHackathon/BeeniHackathon/fuzzy_wuzzy/data/recruitment_data1.csv' #change filepath
     df_file = pd.read_csv(rf'{filepath}')
 
-    header = ['applicantId','firstName', 'lastName', 'birthDate', 'email', 'phoneNumber', 'address', 'skills']
+    #header = ['applicantId','firstName', 'lastName', 'birthDate', 'email', 'phoneNumber', 'address', 'skills']
+    header = ['applicantId','firstName', 'lastName', 'birthDate', 'email', 'phoneNumber', 'address', 'jobTitle', 'skills', 'gender', 'educationLevel', 'yearsOfExperience', 'supplierName', 'customerName']
 
     df = df_file[header]
 
@@ -37,7 +38,14 @@ def check_one():
                     , 'email': 1
                     , 'phoneNumber': 1
                     , 'address': 4
-                    , 'skills': 3}
+                    , 'jobTitle': 0
+                    , 'skills': 3
+                    , 'gender': 0
+                    , 'educationLevel': 0
+                    , 'yearsOfExperience': 0
+                    , 'supplierName': 0
+                    , 'customerName': 0
+                    }
 
     min_treshold = 70
     result = []
@@ -58,7 +66,7 @@ def check_one():
                         score = fuzz.WRatio(str(value), str(input_candidate[key]))
                         total_score += score
 
-        average_score = total_score / (len(input_candidate) - 2)
+        average_score = total_score / (len(input_candidate) - 8)
 
         if average_score >= 80:   
             for key, value in candidate.items():
@@ -82,12 +90,11 @@ def check_one():
         input_candidate_json = json.dumps(input_candidate)
         input_candidate_pd = json.loads(input_candidate_json)
         df_input = pd.DataFrame(input_candidate_pd, index=[0])
-        print(df_input);
         df_input['applicantId']=df_file['applicantId'].max()+1
         df_input = df_input.reindex(columns=df_file.columns)
         df_input.to_csv(filepath, mode='a', columns=header, header=False)
         merged_dict={}
-
+    
     return merged_dict
     #return merged_dict.to_json(orient='records')
 
