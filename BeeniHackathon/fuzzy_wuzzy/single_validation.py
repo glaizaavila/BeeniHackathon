@@ -9,8 +9,8 @@ app = Flask(__name__)
 def check_one():
     input_candidate = request.get_json()
 
-    #filepath = './data/recruitment_data1.csv' #change filepath
-    filepath = r'C:/Users/Beeline User/Documents/GLAIZA/repositories/BeeniHackathon/BeeniHackathon/fuzzy_wuzzy/data/recruitment_data1.csv' #change filepath
+    filepath = './data/recruitment_data1.csv' #change filepath
+    #filepath = r'C:/Users/Beeline User/Documents/GLAIZA/repositories/BeeniHackathon/BeeniHackathon/fuzzy_wuzzy/data/recruitment_data1.csv' #change filepath
     df_file = pd.read_csv(rf'{filepath}', index_col = False)
     test = df_file.fillna('')
 
