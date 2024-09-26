@@ -9,14 +9,14 @@ app = Flask(__name__)
 def check_one():
     input_candidate = request.get_json()
 
-    #filepath = './data/recruitment_data1.csv' #change filepath
-    filepath = r'D:/npax/BeeniHackathon/BeeniHackathon/fuzzy_wuzzy/data/recruitment_data1.csv' #change filepath
+    filepath = './data/recruitment_data1.csv' #change filepath
+    #filepath = r'C:/Users/Beeline User/Documents/GLAIZA/repositories/BeeniHackathon/BeeniHackathon/fuzzy_wuzzy/data/recruitment_data1.csv' #change filepath
     df_file = pd.read_csv(rf'{filepath}', index_col=False)
     test = df_file.fillna('')
 
     #header = ['applicantId','firstName', 'lastName', 'birthDate', 'email', 'phoneNumber', 'address', 'skills']
-    header = ['applicantId','applicationDate','firstName', 'lastName', 
-              'gender', 'birthDate', 'phoneNumber', 'email', 'address', 
+    header = ['applicantId','applicationDate','firstName', 'lastName',
+              'gender', 'birthDate', 'phoneNumber', 'email', 'address',
               'educationLevel', 'yearsOfExperience', 'jobTitle', 'status',
               'supplierName', 'customerName', 'skills']
 
@@ -50,7 +50,7 @@ def check_one():
                     , 'supplierName': 0
                     , 'customerName': 0
                     , 'applicationDate': 0
-                    }
+                    , 'status': 0}
 
     min_treshold = 70
     result = []
@@ -81,7 +81,6 @@ def check_one():
                             score = fuzz.ratio(str(value), str(input_candidate[key]))
                             total_score += score
             average_score = total_score / (len(input_candidate) - 7)
-        
         if average_score >= min_treshold: 
             counter += 1
             candidate.update({'Result ID':counter})
@@ -102,11 +101,9 @@ def check_one():
         df_input = df_input.reindex(columns=df_file.columns)
         df_input.to_csv(filepath, mode='a', columns=header, header=False, index=False, na_rep='')
         merged_dict={}
-
     
     return merged_dict
-    #return json.dumps(merged_dict)
-
+    #return merged_dict.to_json(orient='records')
 
 # for saving data    
 @app.route('/candidate/submit', methods=[ 'POST']) #change route
@@ -121,7 +118,10 @@ def save_record():
     return jsonify({'message': 'New candidate saved successfully!'})
 
 @app.route('/candidate/listview') #change route
+@app.route('/candidate/listview') #change route
 def read_all_record(): #if we want a table of all candidates
+    #filepath = r'D:/npax/BeeniHackathon/BeeniHackathon/fuzzy_wuzzy/data/recruitment_data1.csv' #change filepath
+    filepath = './data/recruitment_data1.csv' #change filepath
     #filepath = r'D:/npax/BeeniHackathon/BeeniHackathon/fuzzy_wuzzy/data/recruitment_data1.csv' #change filepath
     filepath = './data/recruitment_data1.csv' #change filepath
     df_file=pd.read_csv(filepath)

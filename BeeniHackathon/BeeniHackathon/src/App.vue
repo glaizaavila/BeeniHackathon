@@ -5,14 +5,30 @@
     <RouterLink to="/list" id="candidateList">View Candidate List</RouterLink>
   </nav>
   <main>
+    <!-- <RouterView @route-change="handleRouteChange"/> -->
     <RouterView />
   </main>
 </template>
 
 <script>
+  // import { ref } from 'vue';
+  // import { useRoute } from 'vue-router';
+
+  // const isMainVisible = ref(false);
+  // const route = useRoute();
+
+  // const handleRouteChange = () => {
+  //   if (route.path === '/create' || route.path === '/list') {
+  //     isMainVisible.value = true;
+  //   } else {
+  //     isMainVisible.value = false;
+  //   }
+  // };
+
+  // handleRouteChange();
 </script>
 
-<style>
+<style scoped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
