@@ -1,18 +1,20 @@
 
 export interface CandidateRequest {
+    applicationDate: string,
     firstName: string,
     lastName: string, 
-    email: string,
-    phoneNumber: string,
-    birthDate: string,
     gender: string,
+    birthDate: string,
+    phoneNumber: string,
+    email: string,
     address: string,
-    educationalLevel: string,
+    educationLevel: string,
     yearsOfExperience: string,
     jobTitle: string,
-    skills: string,
+    status: string,
     supplierName: string,
-    customerName: string
+    customerName: string,
+    skills: string
 }
 
 export interface CandidateResponse {
