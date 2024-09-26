@@ -46,7 +46,7 @@
 
 
   <div class="table" v-if="responseDuplicates">
-    <h3>Possible Duplicate Candidates</h3>
+    <h4>Possible Duplicate Candidates</h4>
 
     <EasyDataTable :headers="headers" :items="responseDuplicates" theme-color="#1d90ff"
       table-class-name="customize-table" header-text-direction="center" body-text-direction="center"
@@ -153,13 +153,13 @@ const formatDateToMMDDYYYY = (date: string) => {
 
 <style>
 form {
-  width: 186%;
-  display: block;
-  margin: 20px auto;
+  width: 50%;
+  margin-left: 9px;
   background: white;
   text-align: left;
   padding: 20px 30px;
   border-radius: 10px;
+  border: 2px solid #414141
 }
 
 label {
@@ -237,14 +237,25 @@ h3 {
   margin: 0;
 }
 
+th, td {
+  font-size: 13px;
+}
+
+h3, h4 {
+  margin-bottom: 20px;
+}
+
 .customize-table {
-  --easy-table-border: 5px solid #448500;
-  --easy-table-row-border: 3px solid #448500;
+  width: 100%;
+  overflow-x: scroll;
+  overflow-y: visible;
+  --easy-table-border: 5px solid #588548;
+  --easy-table-row-border: 3px solid #588548;
 
   --easy-table-header-font-size: 18px;
   --easy-table-header-height: 25px;
   --easy-table-header-font-color: #ffffff;
-  --easy-table-header-background-color: #448500;
+  --easy-table-header-background-color: #588548;
 
   --easy-table-header-item-padding: 10px 15px;
 
@@ -261,7 +272,7 @@ h3 {
 
   --easy-table-body-item-padding: 10px 15px;
 
-  --easy-table-footer-background-color: #448500;
+  --easy-table-footer-background-color: #588548;
   --easy-table-footer-font-color: #ffffff;
   --easy-table-footer-font-size: 14px;
   --easy-table-footer-padding: 0px 10px;
