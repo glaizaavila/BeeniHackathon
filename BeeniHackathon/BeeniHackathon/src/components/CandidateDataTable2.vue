@@ -12,14 +12,9 @@
   <ProfileModal v-if="isOpen" @close="closeProfile" ></ProfileModal>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
 import type { Header, Item, ClickRowArgument } from "vue3-easy-data-table"
 import ProfileModal from "./ProfileModal.vue";
-
-const props = defineProps({
-  
-})
-
 
 export default{
   data() {
@@ -42,14 +37,8 @@ export default{
   },
   setup() {
     const headers: Header[] = [
-      { text: "First Name", value: "name" ,sortable: true},
-      { text: "Last Name", value: "name" ,sortable: true},
-      { text: "Email", value: "name" ,sortable: true},
-      { text: "Contact Number", value: "name" ,sortable: true},
-      { text: "Job Title", value: "name" ,sortable: true},
-      { text: "Status", value: "name" ,sortable: true},
-      { text: "Supplier", value: "name" ,sortable: true},
-      { text: "Client", value: "name" ,sortable: true}
+      { text: "Name", value: "name" ,sortable: true},
+      { text: "Score", value: "score", sortable: true }
     ];
 
     const items: Item[] = [

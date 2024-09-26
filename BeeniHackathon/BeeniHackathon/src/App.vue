@@ -1,9 +1,13 @@
 <template>
-  <nav>
+  <div>
     <h1 class="green">Hello! </h1>
+  </div>
+  <br />
+  <div>
     <RouterLink to="/create" id="candidateCreate">Create Candidate</RouterLink>
     <RouterLink to="/list" id="candidateList">View Candidate List</RouterLink>
-  </nav>
+  </div>
+  <br />
   <main>
     <!-- <RouterView @route-change="handleRouteChange"/> -->
     <RouterView />
@@ -11,21 +15,21 @@
 </template>
 
 <script>
-  // import { ref } from 'vue';
-  // import { useRoute } from 'vue-router';
+// import { ref } from 'vue';
+// import { useRoute } from 'vue-router';
 
-  // const isMainVisible = ref(false);
-  // const route = useRoute();
+// const isMainVisible = ref(false);
+// const route = useRoute();
 
-  // const handleRouteChange = () => {
-  //   if (route.path === '/create' || route.path === '/list') {
-  //     isMainVisible.value = true;
-  //   } else {
-  //     isMainVisible.value = false;
-  //   }
-  // };
+// const handleRouteChange = () => {
+//   if (route.path === '/create' || route.path === '/list') {
+//     isMainVisible.value = true;
+//   } else {
+//     isMainVisible.value = false;
+//   }
+// };
 
-  // handleRouteChange();
+// handleRouteChange();
 </script>
 
 <style scoped>
@@ -35,7 +39,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 20px;
 }
 
 body {
